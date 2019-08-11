@@ -1,14 +1,17 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      CONTROLE E MANEJO DE LAVOURAS
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <img src="http://blog.multitecnica.com.br/wp-content/uploads/sites/12/2017/01/farmer-staring-into-organic-farm-field.jpg">
+  <h1 class="custom-title">Login</h1>
+  <div class="container-buttons">
+    <button ion-button outline [navPush] = "'cria-usuario'" >Criar Conta</button>
+    <button ion-button outline [navPush]="'login-usuario'">Já possui uma conta? Entrar</button>
+  </div>
+  
 </ion-content>
