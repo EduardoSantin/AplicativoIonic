@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AlertController } from 'ionic-angular';
-
+import { Storage } from '@ionic/storage';
 
 @IonicPage({
   name: "login-usuario"
@@ -20,7 +20,8 @@ export class LoginUsuarioPage {
     public navParams: NavParams, 
     public formbuilder: FormBuilder,
     public afAuth: AngularFireAuth,
-    public alertCtrl: AlertController) {
+    public alertCtrl: AlertController,
+    public storage: Storage) {
     this.loginForm = this.formbuilder.group({
       email: [null, [Validators.required, Validators.email]],
       senha: [null, [Validators.required, Validators.minLength(6)]]
@@ -29,9 +30,10 @@ export class LoginUsuarioPage {
   
   submitLogin(){
     this.afAuth.auth.signInWithEmailAndPassword(this.loginForm.value.email, this.loginForm.value.senha)
-    .then(() => {
-      this.presentAlert("Logado com Sucesso", "");
-      this.navCtrl.setRoot("start-page");
+    .then((response) => {
+      this.storage.set("user", response.user.uid).then(() => {
+        this.navCtrl.setRoot("start-page");
+      })
     }). catch((error) => {
       if(error.code == 'auth/wrong-password'){
         this.presentAlert("Erro", "Senha incorreta, digite novamente");
