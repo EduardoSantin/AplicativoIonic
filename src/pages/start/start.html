@@ -1,9 +1,14 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>start-page</ion-title>
+    <ion-title>Tarefas da fazenda</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-
+  <div>
+      <button ion-button outline [navPush] = "'nova-area'" >Nova area</button>
+      <button ion-button outline [navPush] = "'novo-plantio'" >Plantio</button>
+      <button ion-button outline [navPush] = "'nova-aplicacao'" >Aplicação</button>
+      <button ion-button outline [navPush] = "'estoque-produtos'" >Estoque</button>
+  </div>
 </ion-content>

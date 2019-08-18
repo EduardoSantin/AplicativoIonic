@@ -33,7 +33,7 @@ export class CriarUsuarioPage {
     this.afAuth.auth.createUserWithEmailAndPassword(this.registreForm.value.email, 
       this.registreForm.value.senha)
       .then((response) => {
-        this.presentAlert("SUCESSO", "Usuario Cadastrado com Sucesso");
+        this.presentAlert("SUCESSO", "Sua conta foi criada com Sucesso");
         this.navCtrl.setRoot('start-page');
       }).catch((error) =>{
         if(error.code == 'auth/email-already-in-use'){
