@@ -21,7 +21,7 @@ export class StartPage {
   sair(){
     this.storage.remove("user");
     console.log("usuario deslogado"); 
-    this.navCtrl.setRoot("login-usuario");
+    this.navCtrl.setRoot("home-page");
   }
 
 }

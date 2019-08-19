@@ -13,18 +13,19 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { IonicStorageModule } from '@ionic/storage';
 import { StartPage } from '../pages/start/start';
 import { StartPageModule } from '../pages/start/start.module';
+import { HomePageModule } from '../pages/home/home.module';
 
 @NgModule({
   declarations: [
-    MyApp,
-    HomePage
+    MyApp
   ],
   imports: [
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
-    StartPageModule
+    StartPageModule,
+    HomePageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
