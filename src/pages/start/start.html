@@ -5,6 +5,9 @@
 </ion-header>
 
 <ion-content padding>
+  <div class="right">
+    <button ion-button clear (click)="sair()">Sair</button>
+  </div>
   <div>
       <button ion-button outline [navPush] = "'nova-area'" >Nova area</button>
       <button ion-button outline [navPush] = "'novo-plantio'" >Plantio</button>

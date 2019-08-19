@@ -9,19 +9,19 @@
         <ion-item>
           <ion-input type="text" placeholder="Produto:" [(ngModel)]="produto"></ion-input>
         </ion-item>
-        <div>
-          <ion-item>
+        <ion-item>
             <ion-input type="number" placeholder="Quantidade:" [(ngModel)]="quantidade"></ion-input>
-          </ion-item>
-          <ion-select>
-            <ion-label>Unidade de medida</ion-label>
-            <ion-option selected>L</ion-option>
-            <ion-option>ml</ion-option>
-            <ion-option>kg</ion-option>
-            <ion-option>g</ion-option>
-            <ion-option>mg</ion-option>
+        </ion-item>
+        <ion-item>
+        <ion-select>
+              <ion-label>Unidade de medida</ion-label>
+              <ion-option selected>L</ion-option>
+              <ion-option>ml</ion-option>
+              <ion-option>kg</ion-option>
+              <ion-option>g</ion-option>
+              <ion-option>mg</ion-option>
           </ion-select>
-        </div>
+        </ion-item>
         <div padding>
             <button ion-button (click)="addEstoque(produto, quantidade)" 
             [disabled]="!produto || !quantidade || produto < 1 && quantidade < 1">Salvar</button>
