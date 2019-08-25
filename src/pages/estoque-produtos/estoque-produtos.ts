@@ -74,7 +74,9 @@ export class EstoqueProdutosPage {
     this.http.get('https://fir-login-26b40.firebaseio.com/estoques/'+this.uid+'.json')
     .map(res => res.json())
     .subscribe(data => {
-      this.trataDados(data);
+      if(data != null && data != undefined){
+        this.trataDados(data);
+      }
     })
   }
 

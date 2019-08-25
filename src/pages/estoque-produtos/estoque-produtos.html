@@ -20,13 +20,17 @@
           </ion-item>
         <div padding>
             <button ion-button (click)="addEstoque(produto, quantidade, unidadeSelecionada)" 
-            [disabled]="!produto || !quantidade || produto < 1 && quantidade < 1">Salvar</button>
+            [disabled]="!produto || !quantidade || !unidadeSelecionada || produto < 1 && quantidade < 1 && unidadeSelecionada == ''">Salvar</button>
         </div>
     </ion-list>
-    <div padding>
-      <ul>
-        <li *ngFor="let item of list">{{item.produto}} - {{item.quantidade}} {{item.unidadeSelecionada}}</li>
-      </ul>
-      
-    </div>
+    
+    <h3>Seu estoque</h3>
+    <ion-card *ngFor="let item of list">
+      <ion-card-content>
+        <ion-card-title>
+            <span>{{item.produto}}</span>
+        </ion-card-title>
+        <p>{{item.quantidade}}-{{item.unidadeSelecionada}}</p>
+      </ion-card-content>
+    </ion-card>
 </ion-content>
