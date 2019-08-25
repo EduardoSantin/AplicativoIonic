@@ -14,6 +14,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { StartPage } from '../pages/start/start';
 import { StartPageModule } from '../pages/start/start.module';
 import { HomePageModule } from '../pages/home/home.module';
+import { HttpModule } from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -25,13 +26,14 @@ import { HomePageModule } from '../pages/home/home.module';
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
     StartPageModule,
-    HomePageModule
+    HomePageModule,
+    HttpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
-    StartPage
+    StartPage,
   ],
   providers: [
     StatusBar,

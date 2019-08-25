@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Storage } from '@ionic/storage';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { Http } from '@angular/http';
 
 
 @IonicPage({
@@ -25,7 +26,8 @@ export class EstoqueProdutosPage {
     public afAuth: AngularFireAuth,
     public alertCtrl: AlertController,
     public storage: Storage,
-    public db: AngularFireDatabase) {
+    public db: AngularFireDatabase,
+    public http: Http) {
   
     }
 
@@ -40,15 +42,27 @@ export class EstoqueProdutosPage {
   }
 
   getList(){
-    let listDb = this.db.database.ref("/estoques").child(this.uid);
-    listDb.on('value', (snapshot) =>{
-      const itens = snapshot.val();
-      if(itens){
-        // tipo um for com javascript
-        this.list = Object.keys(itens).map(i => itens[i]);
-      }
+    this.http.get('https://fir-login-26b40.firebaseio.com/estoques/'+this.uid+'.json')
+    .map(res => res.json())
+    .subscribe(data => {
+      this.trataDados(data);
     })
   }
+
+  trataDados(dados){
+    this.list = Object.keys(dados).map(i => dados[i]);
+    console.log(this.list);
+  }
+
+  // getList(){
+  //   let listDb = this.db.database.ref("/estoques").child(this.uid);
+  //   listDb.on('value', (snapshot) =>{
+  //     const itens = snapshot.val();
+  //     if(itens){
+  //       this.list = Object.keys(itens).map(i => itens[i]);
+  //     }
+  //   })
+  // }
 
   ionViewDidLoad(){
     this.storage.get("user").then((resolve) => {
