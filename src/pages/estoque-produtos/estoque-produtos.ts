@@ -18,8 +18,33 @@ export class EstoqueProdutosPage {
   uid: string;
   produto;
   quantidade;
+  unidadeSelecionada;
   list;
 
+
+  // unidades de medidas para popular select
+  unidade: any[] = [
+    {
+      id:1,
+      name: 'L (Litros)'
+    },
+    {
+      id:1,
+      name: 'ml (Mililitros)'
+    },
+    {
+      id:1,
+      name: 'kg (Kilogramas)'
+    },
+    {
+      id:1,
+      name: 'g (Gramas)'
+    },
+    {
+      id:1,
+      name: 'mg (Miligramas)'
+    }
+  ];
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
@@ -31,15 +56,19 @@ export class EstoqueProdutosPage {
   
     }
 
-  addEstoque(produto: string, quantidade: number){
+  addEstoque(produto: string, quantidade: number, unidadeSelecionada: string){
     this.db.database.ref("/estoques").child(this.uid).push({
       produto: produto,
-      quantidade: quantidade
+      quantidade: quantidade,
+      unidadeSelecionada: unidadeSelecionada
     }).then(() =>{
       this.produto = "";
       this.quantidade = "";
+      this.unidadeSelecionada = "";
+      this.getList();
     })
   }
+
 
   getList(){
     this.http.get('https://fir-login-26b40.firebaseio.com/estoques/'+this.uid+'.json')
@@ -50,8 +79,9 @@ export class EstoqueProdutosPage {
   }
 
   trataDados(dados){
-    this.list = Object.keys(dados).map(i => dados[i]);
-    console.log(this.list);
+    if(dados!= null){
+      this.list = Object.keys(dados).map(i => dados[i]);
+    }
   }
 
   // getList(){

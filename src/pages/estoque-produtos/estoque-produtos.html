@@ -13,23 +13,19 @@
             <ion-input type="number" placeholder="Quantidade:" [(ngModel)]="quantidade"></ion-input>
         </ion-item>
         <ion-item>
-        <ion-select>
-              <ion-label>Unidade de medida</ion-label>
-              <ion-option selected>L</ion-option>
-              <ion-option>ml</ion-option>
-              <ion-option>kg</ion-option>
-              <ion-option>g</ion-option>
-              <ion-option>mg</ion-option>
-          </ion-select>
-        </ion-item>
+            <ion-label>Unidade de medida</ion-label>
+            <ion-select okText="OK" cancelText="Cancelar" [(ngModel)]="unidadeSelecionada">
+              <ion-option *ngFor='let unid of unidade'>{{unid.name}}</ion-option>
+            </ion-select>
+          </ion-item>
         <div padding>
-            <button ion-button (click)="addEstoque(produto, quantidade)" 
+            <button ion-button (click)="addEstoque(produto, quantidade, unidadeSelecionada)" 
             [disabled]="!produto || !quantidade || produto < 1 && quantidade < 1">Salvar</button>
         </div>
     </ion-list>
     <div padding>
       <ul>
-        <li *ngFor="let item of list">{{item.produto}} - {{item.quantidade}}</li>
+        <li *ngFor="let item of list">{{item.produto}} - {{item.quantidade}} {{item.unidadeSelecionada}}</li>
       </ul>
       
     </div>
