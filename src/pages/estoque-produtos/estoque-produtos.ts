@@ -26,22 +26,26 @@ export class EstoqueProdutosPage {
   unidade: any[] = [
     {
       id:1,
+      name: ' T (Toneladas)'
+    },
+    {
+      id:2,
       name: 'L (Litros)'
     },
     {
-      id:1,
+      id:3,
       name: 'ml (Mililitros)'
     },
     {
-      id:1,
+      id:4,
       name: 'kg (Kilogramas)'
     },
     {
-      id:1,
+      id:5,
       name: 'g (Gramas)'
     },
     {
-      id:1,
+      id:6,
       name: 'mg (Miligramas)'
     }
   ];
@@ -86,21 +90,22 @@ export class EstoqueProdutosPage {
     }
   }
 
-  // getList(){
-  //   let listDb = this.db.database.ref("/estoques").child(this.uid);
-  //   listDb.on('value', (snapshot) =>{
-  //     const itens = snapshot.val();
-  //     if(itens){
-  //       this.list = Object.keys(itens).map(i => itens[i]);
-  //     }
-  //   })
-  // }
-
+  
   ionViewDidLoad(){
     this.storage.get("user").then((resolve) => {
       this.uid = resolve;
       this.getList();
     })
   }
-
+  
 }
+
+// getList(){
+//   let listDb = this.db.database.ref("/estoques").child(this.uid);
+//   listDb.on('value', (snapshot) =>{
+//     const itens = snapshot.val();
+//     if(itens){
+//       this.list = Object.keys(itens).map(i => itens[i]);
+//     }
+//   })
+// }
