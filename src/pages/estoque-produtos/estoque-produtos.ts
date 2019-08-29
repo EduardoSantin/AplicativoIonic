@@ -5,7 +5,6 @@ import { Storage } from '@ionic/storage';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Http } from '@angular/http';
 
-
 @IonicPage({
   name:"estoque-produtos"
 })
@@ -57,7 +56,6 @@ export class EstoqueProdutosPage {
     public storage: Storage,
     public db: AngularFireDatabase,
     public http: Http) {
-  
     }
 
   addEstoque(produto: string, quantidade: number, unidadeSelecionada: string){
@@ -73,8 +71,20 @@ export class EstoqueProdutosPage {
     })
   }
 
+  editarEstoque(estoque){
+
+  }
+
+  excluirEstoque(key){
+    this.db.database.ref("/estoques").child(this.uid).child(key).remove()
+    .then(() => {
+      console.log("excluiu");
+      this.getList();
+    })
+  }
 
   getList(){
+    console.log("carega pagina");
     this.http.get('https://fir-login-26b40.firebaseio.com/estoques/'+this.uid+'.json')
     .map(res => res.json())
     .subscribe(data => {
@@ -86,7 +96,10 @@ export class EstoqueProdutosPage {
 
   trataDados(dados){
     if(dados!= null){
-      this.list = Object.keys(dados).map(i => dados[i]);
+      this.list = Object.keys(dados).map(i =>   {
+        dados[i].key = i;
+        return dados[i];
+      });
     }
   }
 
