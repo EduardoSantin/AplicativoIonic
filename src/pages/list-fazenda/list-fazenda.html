@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Fazendas</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <button ion-button color="secundary" [navPush] = "'nova-fazenda'">Adicionar Fazenda</button>
+  <h3>Suas fazendas</h3>
+  <ion-card *ngFor="let item of list">
+    <ion-item>
+      <ion-card-content>
+        <ion-card-title>
+          <span>{{item.nome}}</span>
+        </ion-card-title>
+        <ion-item>
+          <button ion-button color="secundary" (click)="areasDaFazenda(item.nome)" >
+            <ion-icon name="add-circle-outline"></ion-icon>
+          </button>
+          <button ion-button color="danger" (click)="excluirFazenda(item.key)">
+            <ion-icon name="trash"></ion-icon>
+          </button>
+        </ion-item>
+      </ion-card-content>
+    </ion-item>
+  </ion-card>
+</ion-content>

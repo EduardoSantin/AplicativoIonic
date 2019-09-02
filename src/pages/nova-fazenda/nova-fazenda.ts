@@ -4,19 +4,16 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { Storage } from '@ionic/storage';
 
 @IonicPage({
-  name: "nova-area"
+  name: "nova-fazenda"
 })
 @Component({
-  selector: 'page-nova-area',
-  templateUrl: 'nova-area.html',
+  selector: 'page-nova-fazenda',
+  templateUrl: 'nova-fazenda.html',
 })
-export class NovaAreaPage {
+export class NovaFazendaPage {
 
-  nomeFazenda;
   uid: string;
   nome;
-  list;
-
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -29,28 +26,14 @@ export class NovaAreaPage {
       nome: nome
     }).then(() => {
       this.nome = "";
-      this.getList();
+      this.storage.set("nomeFazenda", nome);
+      this.navCtrl.setRoot("nova-area");
     })
   }
 
-  getList(){
-    let listDb = this.db.database.ref("fazenda").child(this.uid);
-    listDb.on('value', (snapshot) => {
-      const itens = snapshot.val();
-      if(itens){
-        this.list = Object.keys(itens).map(i => itens[i]);
-      }
-    })
-  }
-  
   ionViewDidLoad(){
     this.storage.get("user").then((resolve) => {
       this.uid = resolve;
-      this.getList();
-    })
-    this.storage.get('nomeFazenda').then((resolve) => {
-      this.nomeFazenda = resolve;
     })
   }
-  
 }

@@ -19,7 +19,7 @@ export class EstoqueProdutosPage {
   quantidade;
   unidadeSelecionada;
   list;
-
+  listEditar;
 
   // unidades de medidas para popular select
   unidade: any[] = [
@@ -70,21 +70,15 @@ export class EstoqueProdutosPage {
       this.getList();
     })
   }
-
-  editarEstoque(estoque){
-
-  }
-
+  
   excluirEstoque(key){
     this.db.database.ref("/estoques").child(this.uid).child(key).remove()
     .then(() => {
-      console.log("excluiu");
       this.getList();
     })
   }
 
   getList(){
-    console.log("carega pagina");
     this.http.get('https://fir-login-26b40.firebaseio.com/estoques/'+this.uid+'.json')
     .map(res => res.json())
     .subscribe(data => {
@@ -112,13 +106,3 @@ export class EstoqueProdutosPage {
   }
   
 }
-
-// getList(){
-//   let listDb = this.db.database.ref("/estoques").child(this.uid);
-//   listDb.on('value', (snapshot) =>{
-//     const itens = snapshot.val();
-//     if(itens){
-//       this.list = Object.keys(itens).map(i => itens[i]);
-//     }
-//   })
-// }
