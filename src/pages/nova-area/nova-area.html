@@ -5,8 +5,18 @@
 </ion-header>
 
 <ion-content padding>
-  Fazenda <strong>{{nomeFazenda}}</strong>
+  <h3>Fazenda <strong>{{nomeFazenda}}</strong></h3>
   <br>
-  Estamos em desenvolvimento
-
+  <ion-list>
+    <ion-item>
+      <ion-input type="text" placeholder="Area:" [(ngModel)]="nome"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="number" placeholder="Hectares:" [(ngModel)]="hectares"></ion-input>
+    </ion-item>
+    <div padding>
+        <button ion-button (click)="addArea(nome, hectares)" 
+        [disabled]="!nome || nome < 1 ">Salvar</button>
+    </div>
+  </ion-list>
 </ion-content>

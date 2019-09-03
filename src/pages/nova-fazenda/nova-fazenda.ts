@@ -27,7 +27,7 @@ export class NovaFazendaPage {
     }).then(() => {
       this.nome = "";
       this.storage.set("nomeFazenda", nome);
-      this.navCtrl.setRoot("nova-area");
+      this.navCtrl.push("nova-area");
     })
   }
 

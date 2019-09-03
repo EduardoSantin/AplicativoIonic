@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { Storage } from '@ionic/storage';
+import { AngularFireDatabase } from '@angular/fire/database';
 
 @IonicPage({
   name: "listFazenda"
@@ -20,12 +21,19 @@ export class ListFazendaPage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public http: Http,
-    public storage: Storage) {
+    public storage: Storage,
+    public db: AngularFireDatabase) {
   }
 
   areasDaFazenda(nome){
     this.storage.set('nomeFazenda', nome);
     this.navCtrl.push("areas");
+  }
+
+  excluirFazenda(key){
+    this.db.database.ref("/fazenda").child(this.uid).child(key).remove().then(() => {
+      this.getList();
+    })
   }
 
   getList(){

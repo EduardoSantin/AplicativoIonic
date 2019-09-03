@@ -12,9 +12,10 @@ import { Storage } from '@ionic/storage';
 })
 export class NovaAreaPage {
 
-  nomeFazenda;
   uid: string;
+  nomeFazenda;
   nome;
+  hectares;
   list;
 
 
@@ -24,29 +25,20 @@ export class NovaAreaPage {
     public storage: Storage) {
   }
 
-  addFazenda(nome: string){
-    this.db.database.ref("fazenda").child(this.uid).push({
-      nome: nome
+  addArea(nome: string, hectares: number){
+    this.db.database.ref("areas").child(this.uid).child("Fazenda: "+this.nomeFazenda).push({
+      nome: nome,
+      hectares: hectares
     }).then(() => {
       this.nome = "";
-      this.getList();
-    })
-  }
-
-  getList(){
-    let listDb = this.db.database.ref("fazenda").child(this.uid);
-    listDb.on('value', (snapshot) => {
-      const itens = snapshot.val();
-      if(itens){
-        this.list = Object.keys(itens).map(i => itens[i]);
-      }
+      this.hectares = "";
+      this.navCtrl.push("areas");
     })
   }
   
   ionViewDidLoad(){
     this.storage.get("user").then((resolve) => {
       this.uid = resolve;
-      this.getList();
     })
     this.storage.get('nomeFazenda').then((resolve) => {
       this.nomeFazenda = resolve;

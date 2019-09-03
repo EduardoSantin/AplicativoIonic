@@ -1,14 +1,27 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>areas</ion-title>
+    <ion-title>Areas Fazenda {{nomeFazenda}}</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  Areas da Fazenda <strong>{{nomeFazenda}}</strong>
-  <br>
-  Estamos em desenvolvimento
-
   <button ion-button color="secundary" [navPush] = "'nova-area'">Adicionar area</button>
-
+  <ion-card *ngFor="let item of list">
+  <ion-item>
+    <ion-card-content>
+      <ion-card-title>
+        <span>{{item.nome}}</span>
+        <p>{{item.hectares}} - hectares</p>
+      </ion-card-title>
+      <ion-item>
+        <button ion-button color="secondary" (click)="editarArea(item.key)">
+          <ion-icon name="create"></ion-icon>
+        </button>
+        <button ion-button color="danger" (click)="excluirArea(item.key)">
+          <ion-icon name="trash"></ion-icon>
+        </button>
+      </ion-item>
+    </ion-card-content>
+  </ion-item>
+  </ion-card>
 </ion-content>
