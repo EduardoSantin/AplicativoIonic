@@ -21,6 +21,7 @@
     "@angular/http": "5.2.11",
     "@angular/platform-browser": "5.2.11",
     "@angular/platform-browser-dynamic": "5.2.11",
+    "@ionic-native/autostart": "^5.13.0",
     "@ionic-native/core": "~4.20.0",
     "@ionic-native/geolocation": "^5.12.0",
     "@ionic-native/splash-screen": "~4.20.0",
@@ -28,6 +29,7 @@
     "@ionic/storage": "2.2.0",
     "angularfire2": "^5.2.1",
     "cordova-android": "^8.0.0",
+    "cordova-plugin-autostart": "^2.3.0",
     "cordova-sqlite-storage": "^3.2.1",
     "firebase": "^6.4.2",
     "ionic-angular": "3.9.5",
@@ -58,7 +60,8 @@
         "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
       },
       "cordova-plugin-ionic-keyboard": {},
-      "cordova-sqlite-storage": {}
+      "cordova-sqlite-storage": {},
+      "cordova-plugin-autostart": {}
     },
     "platforms": [
       "android"
