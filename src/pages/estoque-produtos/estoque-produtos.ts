@@ -78,6 +78,14 @@ export class EstoqueProdutosPage {
     })
   }
 
+  editarEstoque(item){
+    this.storage.set("id", item.key);
+    this.storage.set("produto", item.produto);
+    this.storage.set("quantidade", item.quantidade);
+    this.storage.set("unidadeSelecionada", item.unidadeSelecionada);
+    this.navCtrl.push("editaEstoque");
+  }
+
   getList(){
     this.http.get('https://fir-login-26b40.firebaseio.com/estoques/'+this.uid+'.json')
     .map(res => res.json())

@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Editando</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-input type="text" placeholder="Produto:" [(ngModel)]="produtoNovo"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-input type="number" placeholder="Quantidade:" [(ngModel)]="quantidadeNovo"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label>Unidade de medida</ion-label>
+        <ion-select okText="OK" cancelText="Cancelar" [(ngModel)]="unidadeSelecionadaNovo">
+          <ion-option *ngFor='let unid of unidade'>{{unid.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+    <div padding>
+        <button ion-button (click)="editaEstoque(produtoNovo, quantidadeNovo, unidadeSelecionadaNovo)" 
+        [disabled]="!produtoNovo || !quantidadeNovo || !unidadeSelecionadaNovo || produtoNovo < 1 && quantidadeNovo < 1 && unidadeSelecionadaNovo == ''">Salvar</button>
+    </div>
+</ion-list>
+</ion-content>
