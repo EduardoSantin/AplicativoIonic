@@ -62,7 +62,7 @@ export class EditaEstoquePage {
       unidadeSelecionada: unidadeSelecionadaNovo
     }).then(()=>{
       this.removeStorage();
-      this.navCtrl.push("estoque-produtos");
+      this.navCtrl.setRoot("estoque-produtos");
     })
   }
 

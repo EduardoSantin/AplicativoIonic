@@ -21,34 +21,6 @@ export class EstoqueProdutosPage {
   list;
   listEditar;
 
-  // unidades de medidas para popular select
-  unidade: any[] = [
-    {
-      id:1,
-      name: ' T (Toneladas)'
-    },
-    {
-      id:2,
-      name: 'L (Litros)'
-    },
-    {
-      id:3,
-      name: 'ml (Mililitros)'
-    },
-    {
-      id:4,
-      name: 'kg (Kilogramas)'
-    },
-    {
-      id:5,
-      name: 'g (Gramas)'
-    },
-    {
-      id:6,
-      name: 'mg (Miligramas)'
-    }
-  ];
-
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public afAuth: AngularFireAuth,
@@ -57,19 +29,6 @@ export class EstoqueProdutosPage {
     public db: AngularFireDatabase,
     public http: Http) {
     }
-
-  addEstoque(produto: string, quantidade: number, unidadeSelecionada: string){
-    this.db.database.ref("/estoques").child(this.uid).push({
-      produto: produto,
-      quantidade: quantidade,
-      unidadeSelecionada: unidadeSelecionada
-    }).then(() =>{
-      this.produto = "";
-      this.quantidade = "";
-      this.unidadeSelecionada = "";
-      this.getList();
-    })
-  }
   
   excluirEstoque(key){
     this.db.database.ref("/estoques").child(this.uid).child(key).remove()

@@ -5,42 +5,29 @@
 </ion-header>
 
 <ion-content padding>
-    <ion-list>
+  <div>
+    <button ion-button color="secundary" [navPull] = "'start-page'">
+        <ion-icon name="home"></ion-icon>
+    </button>
+    <button class="novo" ion-button color="secundary" [navPush] = "'novo-estoque'">Adicionar Produto</button>
+  </div>
+  <h3>Seu estoque</h3>
+  <ion-card *ngFor="let item of list">
+    <ion-item>
+      <ion-card-content>
+        <ion-card-title>
+          <span>{{item.produto}}</span>
+        </ion-card-title>
+        <p>{{item.quantidade}}-{{item.unidadeSelecionada}}</p>
         <ion-item>
-          <ion-input type="text" placeholder="Produto:" [(ngModel)]="produto"></ion-input>
+          <button ion-button color="secondary" (click)="editarEstoque(item)">
+            <ion-icon name="create"></ion-icon>
+          </button>
+          <button ion-button color="danger" (click)="excluirEstoque(item.key)">
+            <ion-icon name="trash"></ion-icon>
+          </button>
         </ion-item>
-        <ion-item>
-            <ion-input type="number" placeholder="Quantidade:" [(ngModel)]="quantidade"></ion-input>
-        </ion-item>
-        <ion-item>
-            <ion-label>Unidade de medida</ion-label>
-            <ion-select okText="OK" cancelText="Cancelar" [(ngModel)]="unidadeSelecionada">
-              <ion-option *ngFor='let unid of unidade'>{{unid.name}}</ion-option>
-            </ion-select>
-          </ion-item>
-        <div padding>
-            <button ion-button (click)="addEstoque(produto, quantidade, unidadeSelecionada)" 
-            [disabled]="!produto || !quantidade || !unidadeSelecionada || produto < 1 && quantidade < 1 && unidadeSelecionada == ''">Salvar</button>
-        </div>
-    </ion-list>
-    
-    <h3>Seu estoque</h3>
-    <ion-card *ngFor="let item of list">
-      <ion-item>
-        <ion-card-content>
-          <ion-card-title>
-            <span>{{item.produto}}</span>
-          </ion-card-title>
-          <p>{{item.quantidade}}-{{item.unidadeSelecionada}}</p>
-          <ion-item>
-            <button ion-button color="secondary" (click)="editarEstoque(item)">
-              <ion-icon name="create"></ion-icon>
-            </button>
-            <button ion-button color="danger" (click)="excluirEstoque(item.key)">
-              <ion-icon name="trash"></ion-icon>
-            </button>
-          </ion-item>
-        </ion-card-content>
-      </ion-item>
-    </ion-card>
+      </ion-card-content>
+    </ion-item>
+  </ion-card>
 </ion-content>

@@ -4,10 +4,12 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-  <button ion-button color="secundary" [navPush] = "'start-page'">
-      <ion-icon name="home"></ion-icon>
-  </button>
-  <button class="novo" ion-button color="secundary" [navPush] = "'nova-fazenda'">Adicionar Fazenda</button>
+  <div>
+    <button ion-button color="secundary" [navPush] = "'start-page'">
+        <ion-icon name="home"></ion-icon>
+    </button>
+    <button class="novo" ion-button color="secundary" [navPush] = "'nova-fazenda'">Adicionar Fazenda</button>
+  </div>
   <h3>Suas fazendas</h3>
   <ion-card *ngFor="let item of list">
     <ion-item>
