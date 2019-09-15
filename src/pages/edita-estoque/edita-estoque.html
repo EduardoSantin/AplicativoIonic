@@ -19,7 +19,7 @@
         </ion-select>
       </ion-item>
     <div padding>
-        <button ion-button (click)="editaEstoque(produtoNovo, quantidadeNovo, unidadeSelecionadaNovo)" 
+        <button ion-button (click)="salvaEditaEstoque(produtoNovo, quantidadeNovo, unidadeSelecionadaNovo)" 
         [disabled]="!produtoNovo || !quantidadeNovo || !unidadeSelecionadaNovo || produtoNovo < 1 && quantidadeNovo < 1 && unidadeSelecionadaNovo == ''">Salvar</button>
     </div>
 </ion-list>

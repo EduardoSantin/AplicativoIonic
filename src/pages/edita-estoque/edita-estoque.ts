@@ -14,10 +14,10 @@ import { Http } from '@angular/http';
 export class EditaEstoquePage {
 
   uid: string;
-  id: string;
   produtoNovo;
   quantidadeNovo;
   unidadeSelecionadaNovo;
+  item;
 
   // unidades de medidas para popular select
   unidade: any[] = [
@@ -55,40 +55,30 @@ export class EditaEstoquePage {
     public http: Http) {
   }
 
-  editaEstoque(produtoNovo: string, quantidadeNovo: number, unidadeSelecionadaNovo: string){
-    this.db.database.ref("/estoques").child(this.uid).child(this.id).set({
+  salvaEditaEstoque(produtoNovo: string, quantidadeNovo: number, unidadeSelecionadaNovo: string){
+    this.db.database.ref("/estoques").child(this.uid).child(this.item.key).set({
       produto: produtoNovo,
       quantidade: quantidadeNovo,
       unidadeSelecionada: unidadeSelecionadaNovo
     }).then(()=>{
-      this.removeStorage();
+      this.storage.remove("item");
       this.navCtrl.setRoot("estoque-produtos");
     })
   }
 
-  removeStorage(){
-    this.storage.remove("id");
-    this.storage.remove("produto");
-    this.storage.remove("quantidade");
-    this.storage.remove("unidadeSelecionada");
+  populaInput(){
+    this.produtoNovo = this.item.produto;
+    this.quantidadeNovo = this.item.quantidade;
+    this.unidadeSelecionadaNovo = this.item.unidadeSelecionada;
   }
-
 
   ionViewDidLoad() {
     this.storage.get("user").then((resolve) => {
       this.uid = resolve;
     })
-    this.storage.get("id").then((resolve) => {
-      this.id = resolve;
-    })
-    this.storage.get("produto").then((resolve) => {
-      this.produtoNovo = resolve;
-    })
-    this.storage.get("quantidade").then((resolve) => {
-      this.quantidadeNovo = resolve;
-    })
-    this.storage.get("unidadeSelecionada").then((resolve) => {
-      this.unidadeSelecionadaNovo = resolve;
+    this.storage.get("item").then((resolve) => {
+      this.item = resolve;
+      this.populaInput();
     })
   }
 

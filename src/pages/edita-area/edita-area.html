@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Editar area</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-input type="text" placeholder="Area:" [(ngModel)]="nomeNovo"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="number" placeholder="Hectares:" [(ngModel)]="hectaresNovo"></ion-input>
+    </ion-item>
+    <div padding>
+        <button ion-button (click)="salvaEditaArea(nomeNovo, hectaresNovo)" 
+        [disabled]="!nomeNovo || nomeNovo < 1 ">Salvar</button>
+    </div>
+  </ion-list>
+</ion-content>

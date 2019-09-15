@@ -38,10 +38,7 @@ export class EstoqueProdutosPage {
   }
 
   editarEstoque(item){
-    this.storage.set("id", item.key);
-    this.storage.set("produto", item.produto);
-    this.storage.set("quantidade", item.quantidade);
-    this.storage.set("unidadeSelecionada", item.unidadeSelecionada);
+    this.storage.set("item", item);
     this.navCtrl.push("editaEstoque");
   }
 

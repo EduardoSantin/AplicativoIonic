@@ -42,6 +42,20 @@ export class AreasPage {
     }
   }
 
+  
+  editarArea(item){
+    this.storage.set("item", item);
+    this.navCtrl.push("editaArea");
+  }
+  
+  excluirArea(key){
+    this.db.database.ref("areas").child(this.uid)
+    .child("Fazenda: "+this.nomeFazenda).child(key)
+    .remove().then(() => {
+      this.getList();
+    })
+  }
+  
   ionViewDidLoad() {
     this.storage.get("nomeFazenda").then((resolve) => {
       this.nomeFazenda = resolve;
@@ -51,17 +65,4 @@ export class AreasPage {
       this.getList();
     })
   }
-
-  editarArea(key){
-
-  }
-
-  excluirArea(key){
-    this.db.database.ref("areas").child(this.uid)
-    .child("Fazenda: "+this.nomeFazenda).child(key)
-    .remove().then(() => {
-      this.getList();
-    })
-  }
-
 }
