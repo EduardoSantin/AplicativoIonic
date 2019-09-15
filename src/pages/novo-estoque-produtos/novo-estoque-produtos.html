@@ -23,7 +23,7 @@
           <ion-select okText="OK" cancelText="Cancelar" [(ngModel)]="unidadeSelecionada">
             <ion-option *ngFor='let unid of unidade'>{{unid.name}}</ion-option>
           </ion-select>
-        </ion-item>
+      </ion-item>
       <div padding>
           <button ion-button (click)="addEstoque(produto, quantidade, unidadeSelecionada)" 
           [disabled]="!produto || !quantidade || !unidadeSelecionada || produto < 1 && quantidade < 1 && unidadeSelecionada == ''">Salvar</button>
