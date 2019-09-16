@@ -36,13 +36,15 @@ export class PlantioPage {
       area: areaSelecionada,
       cultura: cultura,
       variedade: variedade,
-      data: data
+      data: data,
+      plantado: true
     }).then(()=>{
       this.fazendaSelecionada = "";
       this.areaSelecionada = "";
       this.cultura = "";
       this.variedade = "";
       this.data = "";
+      this.navCtrl.setRoot("areasPlantadas");
     })
   }
 

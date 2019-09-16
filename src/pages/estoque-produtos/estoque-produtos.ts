@@ -54,7 +54,7 @@ export class EstoqueProdutosPage {
 
   trataDados(dados){
     if(dados!= null){
-      this.list = Object.keys(dados).map(i =>   {
+      this.list = Object.keys(dados).map(i => {
         dados[i].key = i;
         return dados[i];
       });

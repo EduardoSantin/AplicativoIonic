@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Areas Plantadas</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div>
+    <button ion-button color="secundary" [navPush] = "'start-page'">
+      <ion-icon name="home"></ion-icon>
+    </button>
+    <button class="novo" ion-button color="secundary" [navPush] = "'novo-plantio'">Salvar plantio</button>
+  </div>
+  <h3>Suas areas plantadas</h3>
+  <ion-card *ngFor="let item of list">
+  <ion-item *ngIf="item.plantado == true">
+    <ion-card-content>
+      <ion-card-title>
+        <span>{{item.cultura}} - {{item.variedade}}</span>
+        <p>{{item.fazenda}} - {{item.area}}</p>
+        <p>Plantado dia: {{item.data}}</p>
+      </ion-card-title>
+      <ion-item>
+        <button ion-button color="secondary" (click)="colher(item)">
+          Colher
+        </button>
+        <button ion-button color="danger" (click)="excluirArea(item.key)">
+          <ion-icon name="trash"></ion-icon>
+        </button>
+      </ion-item>
+    </ion-card-content>
+  </ion-item>
+  </ion-card>
+</ion-content>
