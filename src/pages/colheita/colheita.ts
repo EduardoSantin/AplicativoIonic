@@ -25,6 +25,7 @@ export class ColheitaPage {
   
   salvaColheita(item, sacas, dataColheita){
 
+    this.storage.remove("item");
   }
 
   getList(){

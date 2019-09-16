@@ -47,6 +47,13 @@ export class AreasPlantadasPage {
     this.navCtrl.push("colheita");
   }
 
+  excluirAreaPlantada(key){
+    this.db.database.ref("/plantio").child(this.uid).child(key).remove()
+    .then(()=>{
+      this.getList();
+    })
+  }
+
   ionViewDidLoad() {
     this.storage.get("user").then((resolve) => {
       this.uid = resolve;
