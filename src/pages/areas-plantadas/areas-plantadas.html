@@ -21,7 +21,7 @@
         <p>Plantado dia: {{item.data}}</p>
       </ion-card-title>
       <ion-item>
-        <button ion-button color="secondary" (click)="colher(item)">
+        <button ion-button color="secondary" (click)="colher(item.key)">
           Colher
         </button>
         <button ion-button color="danger" (click)="excluirAreaPlantada(item.key)">
