@@ -13,7 +13,6 @@ import { Storage } from '@ionic/storage';
 export class NovaAreaPage {
 
   uid: string;
-  nomeFazenda;
   nome;
   hectares;
   list;
@@ -26,7 +25,7 @@ export class NovaAreaPage {
   }
 
   addArea(nome: string, hectares: number){
-    this.db.database.ref("areas").child(this.uid).child("Fazenda: "+this.nomeFazenda).push({
+    this.db.database.ref("areas").child(this.uid).push({
       nome: nome,
       hectares: hectares
     }).then(() => {
@@ -39,9 +38,6 @@ export class NovaAreaPage {
   ionViewDidLoad(){
     this.storage.get("user").then((resolve) => {
       this.uid = resolve;
-    })
-    this.storage.get('nomeFazenda').then((resolve) => {
-      this.nomeFazenda = resolve;
     })
   }
   

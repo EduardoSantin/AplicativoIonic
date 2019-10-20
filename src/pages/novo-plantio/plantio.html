@@ -5,12 +5,12 @@
 </ion-header>
 
 <ion-content padding>
-    <ion-item>
+    <!-- <ion-item>
         <ion-label>Fazenda</ion-label>
         <ion-select okText="OK" cancelText="Cancelar" [(ngModel)]="fazendaSelecionada" (ionChange)="populaProximoSelect($event)">
-          <ion-option *ngFor='let fazenda of listFazenda'>{{fazenda.nome}}</ion-option>
+          <ion-option *ngFor='let fazenda of listFazenda' value="{{fazenda.key}}">{{fazenda.nome}}</ion-option>
         </ion-select>
-    </ion-item>
+    </ion-item> -->
     <ion-item>
         <ion-label>Area</ion-label>
         <ion-select okText="OK" cancelText="Cancelar" [(ngModel)]="areaSelecionada">
@@ -28,7 +28,7 @@
         cancelText="Cancelar"[(ngModel)]="data"></ion-datetime>
     </ion-item>
     <div padding>
-        <button ion-button (click)="salvaPlantio(fazendaSelecionada, areaSelecionada, cultura, variedade, data)" 
-        [disabled]="!fazendaSelecionada || !areaSelecionada || !cultura || !variedade || !data || fazendaSelecionada < 1 && areaSelecionada < 1 && cultura == '' && variedade == '' && data">Salvar</button>
+        <button ion-button (click)="salvaPlantio(areaSelecionada, cultura, variedade, data)" 
+        [disabled]="!areaSelecionada || !cultura || !variedade || !data || areaSelecionada < 1 && cultura == '' && variedade == '' && data">Salvar</button>
     </div>
 </ion-content>

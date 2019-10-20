@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AlertController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
@@ -12,7 +12,7 @@ import { Storage } from '@ionic/storage';
   selector: 'page-login-usuario',
   templateUrl: 'login-usuario.html',
 })
-export class LoginUsuarioPage {
+export class LoginUsuarioPage implements OnInit{
 
   loginForm: FormGroup;
 
@@ -22,12 +22,30 @@ export class LoginUsuarioPage {
     public afAuth: AngularFireAuth,
     public alertCtrl: AlertController,
     public storage: Storage) {
+    // this.loginForm = this.formbuilder.group({
+    //   email: [null, [Validators.required, Validators.email]],
+    //   senha: [null, [Validators.required, Validators.minLength(6)]]
+    // })
+  }
+  ngOnInit(): void{
+    this.createForm();
+  }
+
+  private createForm(): void{
     this.loginForm = this.formbuilder.group({
-      email: [null, [Validators.required, Validators.email]],
-      senha: [null, [Validators.required, Validators.minLength(6)]]
+      email: ["", [Validators.required, Validators.email]],
+      senha: ["", [Validators.required, Validators.minLength(6)]]
     })
   }
-  
+
+  get email(): FormControl{
+    return <FormControl>this.loginForm.get("email");
+  }
+
+  get senha(): FormControl{
+    return <FormControl>this.loginForm.get("senha");
+  }
+
   submitLogin(){
     this.afAuth.auth.signInWithEmailAndPassword(this.loginForm.value.email, this.loginForm.value.senha)
     .then((response) => {
@@ -66,5 +84,9 @@ export class LoginUsuarioPage {
     }).catch((error) => {
       return true;
     })
+  }
+
+  ionViewDidLoad(){
+    this.createForm();
   }
 }

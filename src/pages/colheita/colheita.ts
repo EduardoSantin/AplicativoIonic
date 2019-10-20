@@ -14,9 +14,12 @@ import { AngularFireDatabase } from '@angular/fire/database';
 export class ColheitaPage {
 
   uid;
-  keyColher;
+  itemColher;
   list;
   listCalculador;
+  item;
+  listAreaUnica;
+  sacas;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -25,26 +28,24 @@ export class ColheitaPage {
     public db: AngularFireDatabase) {
   }
   
-  salvaColheita(sacas, dataColheita){
-    this.db.database.ref("/plantio").child(this.uid).child(this.keyColher).update({
-      plantado: false,
+  salvaColheita(sacas, dataColheita, item){
+    this.db.database.ref("/plantio").child(this.uid).child(this.itemColher).update({
+      colhido: true,
       sacas: sacas,
-      dataColhido: dataColheita
+      dataColhido: dataColheita,
     }).then(()=>{
+      this.item = item;
       this.calculaProdutividade();
-      this.storage.remove("keyColher");
-      this.navCtrl.setRoot("areasPlantadas");
+      this.sacas = sacas;
     })
   }
 
-  // tentando pegar area para calcularr
+  // pega todas areas do uid para calcularr
   calculaProdutividade(){
-    console.log(this.list);
-    this.http.get("https://fir-login-26b40.firebaseio.com/areas/"+this.uid+"/Fazenda: "+this.list.fazenda+".json")
+    this.http.get('https://fir-login-26b40.firebaseio.com/areas/'+this.uid+'.json')
     .map(res => res.json())
     .subscribe(data => {
       if(data != null || data != undefined){
-        console.log("entrou no if");
         this.trataCalculador(data);
       }
     })
@@ -53,14 +54,35 @@ export class ColheitaPage {
   trataCalculador(dados){
     if(dados != null){
       this.listCalculador = Object.keys(dados).map(i => {
-        dados[i].key = i;
-        return dados[i];
+      dados[i].key = i;
+      return dados[i];
       });
-      console.log(this.listCalculador);
+      // logica para pegar somente a area que foi colhida
+      for(var i = 0; i<=this.listCalculador.length; i++){
+        if(this.listCalculador[i].nome == this.item.area){
+          this.listAreaUnica = this.listCalculador[i];
+          this.salvaProdutividade();
+          break;
+        }
+      }
     }
   }
 
+  produtividade;
+  salvaProdutividade(){
+    this.produtividade = (this.sacas/this.listAreaUnica.hectares).toFixed(2);
+    this.db.database.ref("/plantio").child(this.uid).child(this.itemColher).update({
+      produtividade: this.produtividade+" sacas/ha"
+    }).then(()=>{
+      this.storage.remove("itemColher");
+      this.navCtrl.setRoot("areasPlantadas");
+    })
+  }
+
+
+  // todos os dados da ramificação plantio
   getList(){
+    console.log(this.itemColher);
     this.http.get('https://fir-login-26b40.firebaseio.com/plantio/'+this.uid+'.json')
     .map(res => res.json())
     .subscribe(data => {
@@ -76,16 +98,17 @@ export class ColheitaPage {
         dados[i].key = i;
         return dados[i];
       });
+      console.log("list");
+      console.log(this.list);
     }
   }
-
 
   ionViewDidLoad() {
     this.storage.get("user").then((resolve) => {
       this.uid = resolve;
     })
-    this.storage.get("keyColher").then((resolve) => {
-      this.keyColher = resolve;
+    this.storage.get("itemColher").then((resolve) => {
+      this.itemColher = resolve;
       this.getList();
     })
   }

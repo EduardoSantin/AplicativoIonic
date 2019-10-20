@@ -14,7 +14,6 @@ import { AngularFireDatabase } from '@angular/fire/database';
 export class AreasPage {
 
   uid;
-  nomeFazenda;
   list;
 
   constructor(public navCtrl: NavController,
@@ -25,7 +24,7 @@ export class AreasPage {
   }
 
   getList(){
-    this.http.get("https://fir-login-26b40.firebaseio.com/areas/"+this.uid+"/Fazenda: "+this.nomeFazenda+".json")
+    this.http.get("https://fir-login-26b40.firebaseio.com/areas/"+this.uid+".json")
     .map(res => res.json()).subscribe(data => {
       if(data != null && data != undefined){
         this.trataDados(data);
@@ -50,16 +49,13 @@ export class AreasPage {
   
   excluirArea(key){
     this.db.database.ref("areas").child(this.uid)
-    .child("Fazenda: "+this.nomeFazenda).child(key)
+    .child(key)
     .remove().then(() => {
       this.getList();
     })
   }
   
   ionViewDidLoad() {
-    this.storage.get("nomeFazenda").then((resolve) => {
-      this.nomeFazenda = resolve;
-    })
     this.storage.get("user").then((resolve) => {
       this.uid = resolve;
       this.getList();

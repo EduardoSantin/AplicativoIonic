@@ -42,8 +42,8 @@ export class AreasPlantadasPage {
     }
   }
 
-  colher(key){
-    this.storage.set("keyColher", key);
+  colher(itemColher){
+    this.storage.set("itemColher", itemColher);
     this.navCtrl.push("colheita");
   }
 

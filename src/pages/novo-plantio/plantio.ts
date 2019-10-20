@@ -14,14 +14,11 @@ import { AngularFireDatabase } from '@angular/fire/database';
 export class PlantioPage {
 
   uid;
-  listFazenda;
   listArea;
-  fazendaSelecionada;
   areaSelecionada;
   cultura;
   variedade;
   data;
-  nomeFazenda;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -30,16 +27,14 @@ export class PlantioPage {
     public db: AngularFireDatabase) {
   }
 
-  salvaPlantio(fazendaSelecionada:string, areaSelecionada:string, cultura:string, variedade:string, data:string){
+  salvaPlantio(areaSelecionada:string, cultura:string, variedade:string, data:string){
     this.db.database.ref("/plantio").child(this.uid).push({
-      fazenda: fazendaSelecionada,
       area: areaSelecionada,
       cultura: cultura,
       variedade: variedade,
       data: data,
-      plantado: true
+      colhido: false
     }).then(()=>{
-      this.fazendaSelecionada = "";
       this.areaSelecionada = "";
       this.cultura = "";
       this.variedade = "";
@@ -48,26 +43,31 @@ export class PlantioPage {
     })
   }
 
-  populaSelectFazenda(){
-    this.http.get("https://fir-login-26b40.firebaseio.com/fazenda/"+this.uid+'.json')
-    .map(res => res.json()).subscribe(data => {
-      if(data != null && data != undefined){
-        this.trataDadosFazenda(data);
-      }
-    })
-  }
+  // populaSelectFazenda(){
+  //   this.http.get("https://fir-login-26b40.firebaseio.com/fazenda/"+this.uid+'.json')
+  //   .map(res => res.json()).subscribe(data => {
+  //     if(data != null && data != undefined){
+  //       this.trataDadosFazenda(data);
+  //     }
+  //   })
+  // }
   
-  trataDadosFazenda(dados){
-    if(dados != null){
-      this.listFazenda = Object.keys(dados).map(i => {
-        dados[i].key = i;
-        return dados[i];
-      });
-    }
-  }
+  // trataDadosFazenda(dados){
+  //   if(dados != null){
+  //     this.listFazenda = Object.keys(dados).map(i => {
+  //       dados[i].key = i;
+  //       return dados[i];
+  //     });
+  //   }
+  // }
+
+  // populaProximoSelect(event){
+  //   this.nomeFazenda = event;
+  //   this.populaSelectArea();
+  // }
 
   populaSelectArea(){
-    this.http.get("https://fir-login-26b40.firebaseio.com/areas/"+this.uid+"/Fazenda: "+this.nomeFazenda+".json")
+    this.http.get("https://fir-login-26b40.firebaseio.com/areas/"+this.uid+".json")
     .map(res => res.json()).subscribe(data => {
       if(data != null && data != undefined){
         this.trataDadosArea(data);
@@ -84,15 +84,11 @@ export class PlantioPage {
     }
   }
 
-  populaProximoSelect(event){
-    this.nomeFazenda = event;
-    this.populaSelectArea();
-  }
 
   ionViewDidLoad() {
     this.storage.get("user").then((resolve) => {
       this.uid = resolve;
-      this.populaSelectFazenda();
+      this.populaSelectArea();
     })
   }
 

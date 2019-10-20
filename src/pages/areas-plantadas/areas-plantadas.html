@@ -13,11 +13,11 @@
   </div>
   <h3>Suas areas plantadas</h3>
   <ion-card *ngFor="let item of list">
-  <ion-item *ngIf="item.plantado == true">
+  <ion-item *ngIf="item.colhido == false">
     <ion-card-content>
       <ion-card-title>
         <span>{{item.cultura}} - {{item.variedade}}</span>
-        <p>{{item.fazenda}} - {{item.area}}</p>
+        <p>{{item.area}}</p>
         <p>Plantado dia: {{item.data}}</p>
       </ion-card-title>
       <ion-item>

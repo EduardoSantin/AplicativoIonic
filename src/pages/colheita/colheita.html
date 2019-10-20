@@ -7,7 +7,7 @@
 <ion-content padding>
     <h3>Marcar colheita</h3>
     <ion-card *ngFor="let item of list">
-    <ion-item *ngIf="item.key == keyColher">
+    <ion-item *ngIf="item.key == itemColher">
       <ion-card-content>
         <ion-card-title>
           <span>{{item.cultura}} - {{item.variedade}}</span>
@@ -22,7 +22,7 @@
           cancelText="Cancelar"[(ngModel)]="dataColheita"></ion-datetime>
         </ion-item>
         <div padding>
-          <button ion-button (click)="salvaColheita(sacas, dataColheita)" 
+          <button ion-button (click)="salvaColheita(sacas, dataColheita, item)" 
           [disabled]="!sacas || !dataColheita || sacas < 1 || dataColheita == ''">Salvar</button>
         </div>
       </ion-card-content>

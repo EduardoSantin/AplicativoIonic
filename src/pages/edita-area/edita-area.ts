@@ -14,7 +14,6 @@ import { Http } from '@angular/http';
 export class EditaAreaPage {
 
   uid: string;
-  nomeFazenda;
   nomeNovo;
   hectaresNovo;
   item;
@@ -28,7 +27,6 @@ export class EditaAreaPage {
 
   salvaEditaArea(nomeNovo: string, hectaresNovo: number){
     this.db.database.ref("/areas").child(this.uid)
-    .child("Fazenda: "+this.nomeFazenda)
     .child(this.item.key).set({
       hectares: hectaresNovo,
       nome: nomeNovo
@@ -46,9 +44,6 @@ export class EditaAreaPage {
   ionViewDidLoad() {
     this.storage.get("user").then((resolve) => {
       this.uid = resolve;
-    })
-    this.storage.get("nomeFazenda").then((resolve) => {
-      this.nomeFazenda = resolve;
     })
     this.storage.get("item").then((resolve) => {
       this.item = resolve;
