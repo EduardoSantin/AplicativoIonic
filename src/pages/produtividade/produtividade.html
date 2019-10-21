@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Produtividade</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div>
+    <button ion-button color="secundary" [navPush] = "'start-page'">
+      <ion-icon name="home"></ion-icon>
+    </button>
+  </div>
+  <h3>Produtividade</h3>
+  <ion-card *ngFor="let item of list">
+  <ion-item *ngIf="item.key == itemColher">
+    <ion-card-content>
+      <ion-card-title>
+        <span>{{item.cultura}} - {{item.variedade}}</span>
+      </ion-card-title>
+        <span><strong>{{item.produtividade}}</strong></span>
+        <p>{{item.area}}</p>
+        <p>Plantado dia: {{item.data}}</p>
+        <p>Colhido dia: {{item.dataColhido}}</p>
+        <p>Total: {{item.sacas}} sacas</p>
+    </ion-card-content>
+  </ion-item>
+  </ion-card>
+</ion-content>

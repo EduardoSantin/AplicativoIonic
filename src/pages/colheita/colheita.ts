@@ -20,7 +20,8 @@ export class ColheitaPage {
   item;
   listAreaUnica;
   sacas;
-
+  produtividade;
+  
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public storage: Storage,
@@ -68,21 +69,19 @@ export class ColheitaPage {
     }
   }
 
-  produtividade;
   salvaProdutividade(){
     this.produtividade = (this.sacas/this.listAreaUnica.hectares).toFixed(2);
     this.db.database.ref("/plantio").child(this.uid).child(this.itemColher).update({
       produtividade: this.produtividade+" sacas/ha"
     }).then(()=>{
-      this.storage.remove("itemColher");
-      this.navCtrl.setRoot("areasPlantadas");
+      // this.storage.remove("itemColher");
+      this.navCtrl.setRoot("produtividade");
     })
   }
 
 
   // todos os dados da ramificação plantio
   getList(){
-    console.log(this.itemColher);
     this.http.get('https://fir-login-26b40.firebaseio.com/plantio/'+this.uid+'.json')
     .map(res => res.json())
     .subscribe(data => {
@@ -98,8 +97,6 @@ export class ColheitaPage {
         dados[i].key = i;
         return dados[i];
       });
-      console.log("list");
-      console.log(this.list);
     }
   }
 
