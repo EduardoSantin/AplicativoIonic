@@ -1,9 +1,27 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Previsao</ion-title>
+    <ion-title>Previsao do tempo</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
+  <h2>Previsão para {{previsao?.results.city}}</h2>
+  <ion-list>
+    <ion-item>
+      <ion-label>Cidade</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+  </ion-list>
+  <button ion-button block (click)="buscaPorCidade()">Buscar</button>
 
+  <ion-card *ngFor="let item of previsao?.results.forecast">
+    <ion-card-content>
+      <ion-card-title>
+        {{item.date}} - {{item.weekday}}
+      </ion-card-title>
+      <p>
+        Máx: {{item.max}}° e Mín {{item.min}} - {{item.description}}
+      </p>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
