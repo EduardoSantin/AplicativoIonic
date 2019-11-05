@@ -15,7 +15,7 @@ import { StartPage } from '../pages/start/start';
 import { StartPageModule } from '../pages/start/start.module';
 import { HomePageModule } from '../pages/home/home.module';
 import { HttpModule } from '@angular/http';
-import { HTTP } from '@ionic-native/http/ngx';
+import { HTTP } from '@ionic-native/http';
 
 @NgModule({
   declarations: [

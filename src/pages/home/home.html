@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      CONTROLE E MANEJO DE LAVOURAS
+      MANEJO DE LAVOURAS
     </ion-title>
   </ion-navbar>
 </ion-header>
@@ -9,9 +9,10 @@
 <ion-content padding>
   <img src="http://blog.multitecnica.com.br/wp-content/uploads/sites/12/2017/01/farmer-staring-into-organic-farm-field.jpg">
   <h1 class="custom-title">Login</h1>
-  <div class="container-buttons">
-    <button ion-button outline [navPush] = "'cria-usuario'" >Criar Conta</button>
-    <button ion-button outline [navPush]= "'login-usuario'">Já possui uma conta? Entrar</button>
+  <div>
+    <button ion-button block [navPush] = "'cria-usuario'">Criar Conta</button>
   </div>
-  
+  <div>
+    <button ion-button outline block [navPush]= "'login-usuario'">Já possui uma conta? Entrar</button>
+  </div>
 </ion-content>

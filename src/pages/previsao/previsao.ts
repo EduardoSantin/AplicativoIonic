@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { HTTP } from '@ionic-native/http/ngx';
+import { HTTP } from '@ionic-native/http';
 
 
 @IonicPage({
@@ -19,7 +19,7 @@ export class PrevisaoPage {
     private http: HTTP) {
   }
 
-  ionViewDidEnter(){
+  ionViewDidLoad(){
     this.http.get('https://api.hgbrasil.com/weather?woeid=459427', {}, {}).then(data => {
 
       console.log(data.status);
@@ -34,19 +34,4 @@ export class PrevisaoPage {
 
     });
   }
-
-  // trataDados(dados){
-  //   if(dados != null){
-  //     this.previsao = Object.keys(dados).map(i => {
-  //       dados[i].keys = i;
-  //       return dados[i];
-  //     })
-  //   }
-  //   console.log(this.previsao);
-  // }
-
-  buscaPorCidade(){
-
-  }
-
 }
