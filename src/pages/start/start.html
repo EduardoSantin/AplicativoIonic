@@ -11,19 +11,40 @@
   <ion-grid>
     <ion-row>
       <ion-col size="6">
-        <button ion-button outline [navPush] = "'areas'" >Areas</button>
+        <div class="botao">
+          <label>Areas</label>
+          <a [navPush]= "'areas'"><img src="assets/imgs/areas.png" width="100%" height="80%"></a>
+        </div>
+        </ion-col>
+      <ion-col size="6">
+        <div class="botao">
+          <label>Plantio</label>
+          <a [navPush]= "'areasPlantadas'"><img src="assets/imgs/plantio.jpg" width="100%" height="80%"></a>
+        </div>
       </ion-col>
       <ion-col size="6">
-        <button ion-button outline [navPush] = "'areasPlantadas'" >Plantio</button>
+        <div class="botao">
+          <label>Aplicação</label>
+          <a [navPush]= "'nova-aplicacao'"><img src="assets/imgs/pulverizacao.jpg" width="100%" height="80%"></a>
+        </div>
       </ion-col>
       <ion-col size="6">
-        <button ion-button outline [navPush] = "'nova-aplicacao'" >Aplicação</button>
+        <div class="botao">
+          <label>Estoque</label>
+          <a [navPush]= "'estoque-produtos'"><img src="assets/imgs/estoque.jpg" width="100%" height="80%"></a>
+        </div>
       </ion-col>
       <ion-col size="6">
-        <button ion-button outline [navPush] = "'estoque-produtos'" >Estoque</button>
+        <div class="botao">
+          <label>Previsão</label>
+          <a [navPush]= "'previsao'"><img src="assets/imgs/tempo.jpg" width="100%" height="80%"></a>
+        </div>
       </ion-col>
       <ion-col size="6">
-        <button ion-button outline [navPush] = "'previsao'" >Previsão do tempo</button>
+          <div class="botao">
+            <label>Anotação</label>
+            <a [navPush]= "'anotacao'"><img src="assets/imgs/anotacao.png" width="100%" height="80%"></a>
+          </div>
       </ion-col>
     </ion-row>
   </ion-grid>

@@ -4,17 +4,17 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { Storage } from '@ionic/storage';
 
 @IonicPage({
-  name: "nova-area"
+  name:"novo-anotacao"
 })
 @Component({
-  selector: 'page-nova-area',
-  templateUrl: 'nova-area.html',
+  selector: 'page-novo-anotacao',
+  templateUrl: 'novo-anotacao.html',
 })
-export class NovaAreaPage {
+export class NovoAnotacaoPage {
 
   uid: string;
-  nome;
-  hectares;
+  titulo;
+  anotacao;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -22,14 +22,14 @@ export class NovaAreaPage {
     public storage: Storage) {
   }
 
-  addArea(nome: string, hectares: number){
-    this.db.database.ref("areas").child(this.uid).push({
-      nome: nome,
-      hectares: hectares
+  addAnotacao(titulo: string, anotacao: number){
+    this.db.database.ref("anotacao").child(this.uid).push({
+      titulo: titulo,
+      anotacao: anotacao
     }).then(() => {
-      this.nome = "";
-      this.hectares = "";
-      this.navCtrl.push("areas");
+      this.titulo = "";
+      this.anotacao = "";
+      this.navCtrl.push("anotacao");
     })
   }
   
@@ -38,5 +38,4 @@ export class NovaAreaPage {
       this.uid = resolve;
     })
   }
-  
 }

@@ -1,25 +1,21 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { Storage } from '@ionic/storage';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Http } from '@angular/http';
+import { Storage } from '@ionic/storage';
 
 @IonicPage({
-  name:"estoque-produtos"
+  name:"anotacao"
 })
 @Component({
-  selector: 'page-estoque-produtos',
-  templateUrl: 'estoque-produtos.html',
+  selector: 'page-anotacao',
+  templateUrl: 'anotacao.html',
 })
-export class EstoqueProdutosPage {
+export class AnotacaoPage {
 
   uid: string;
   list;
-  // produto;
-  // quantidade;
-  // unidadeSelecionada;
-  // listEditar;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
@@ -28,22 +24,22 @@ export class EstoqueProdutosPage {
     public storage: Storage,
     public db: AngularFireDatabase,
     public http: Http) {
-    }
-  
-  excluirEstoque(key){
-    this.db.database.ref("/estoques").child(this.uid).child(key).remove()
+  }
+
+  excluirAnotacao(key){
+    this.db.database.ref("/anotacao").child(this.uid).child(key).remove()
     .then(() => {
       this.getList();
     })
   }
 
-  editarEstoque(item){
+  editarAnotacao(item){
     this.storage.set("item", item);
-    this.navCtrl.push("editaEstoque");
+    this.navCtrl.push("editaAnotacao");
   }
 
   getList(){
-    this.http.get('https://fir-login-26b40.firebaseio.com/estoques/'+this.uid+'.json')
+    this.http.get('https://fir-login-26b40.firebaseio.com/anotacao/'+this.uid+'.json')
     .map(res => res.json())
     .subscribe(data => {
       if(data != null && data != undefined){
@@ -61,12 +57,11 @@ export class EstoqueProdutosPage {
     }
   }
 
-  
   ionViewDidLoad(){
     this.storage.get("user").then((resolve) => {
       this.uid = resolve;
       this.getList();
     })
   }
-  
+
 }

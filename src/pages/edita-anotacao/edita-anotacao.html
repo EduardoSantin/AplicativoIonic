@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Edita Anotacao</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <ion-list>
+      <ion-item>
+        <ion-input type="text" placeholder="Titulo:" [(ngModel)]="tituloNovo"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="text" placeholder="Anotação:" [(ngModel)]="anotacaoNovo"></ion-input>
+      </ion-item>
+      <div padding>
+          <button ion-button (click)="salvaEditaAnotacao(tituloNovo, anotacaoNovo)" 
+          [disabled]="!tituloNovo || !anotacaoNovo || tituloNovo < 1 || anotacaoNovo < 1">Salvar</button>
+      </div>
+    </ion-list>
+  </ion-content>  
