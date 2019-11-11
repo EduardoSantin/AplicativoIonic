@@ -1,35 +1,54 @@
 
 <ion-header>
   <ion-navbar>
-    <ion-title>aplicacao</ion-title>
+    <ion-title>Aplicacao</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h1>Estamos em desenvolvimento!!!!!!</h1>
+  <h3>Calculadora para pulverização</h3>
   <ion-list>
-    <!-- nome da aplicação -->
+    <!-- litros -->
+    <fieldset>
+      <h5>Sobre a pulverização</h5>
       <ion-item>
-          <ion-input type="text" placeholder="Nome da aplicação:" [(ngModel)]="nomeAplicacao"></ion-input>
+        <label>Litragem do tanque: </label>
+        <ion-input type="number" placeholder="Litragem do tanque" [(ngModel)]="quantidade"></ion-input>
       </ion-item>
-      <!-- seleciona area -->
+      <!-- vazao -->
       <ion-item>
-          <ion-label>Selecione a area</ion-label>
-          <ion-select okText="OK" cancelText="Cancelar" [(ngModel)]="areaSelecionada">
-            <ion-option *ngFor='let area of areas'>{{area.name}}</ion-option>
+        <label>Vazão por hectare</label>
+          <ion-input type="number" placeholder="Vazão por hectare" [(ngModel)]="vazao"></ion-input>
+      </ion-item>
+      <div padding>
+        <button ion-button (click)="calcularTotal(quantidade, vazao)">Ok</button>
+      </div>
+    </fieldset>
+    <hr>
+    <ion-list *ngIf="hectaresTotal != null">
+        <h3>Total para {{hectaresTotal}} hectares</h3>
+    </ion-list>
+    <hr>
+    <!-- seleciona insumos -->
+    <fieldset>
+      <h5>Insumo</h5>
+        <ion-item>
+          <ion-label>Selecione o insumo</ion-label>
+          <ion-select okText="OK" cancelText="Cancelar" [(ngModel)]="insumo">
+            <ion-option *ngFor='let insumo of listInsumos'>{{insumo.produto}}</ion-option>
           </ion-select>
-      </ion-item>
-      <!-- seleciona insumos -->
-      <ion-item>
-        <ion-label>Selecione o(s) insumos</ion-label>
-        <ion-select okText="OK" cancelText="Cancelar" [(ngModel)]="insumosSelecionado">
-          <ion-option *ngFor='let insumo of insumos'>{{insumo.produto}}</ion-option>
-        </ion-select>
-      </ion-item>
-      <ion-input type="text" placeholder="Dosagem:" [(ngModel)]="dosagem"></ion-input>
-    <div padding>
-        <button ion-button (click)="addDosagem(produto, quantidade, unidadeSelecionada)" 
-        [disabled]="!produto || !quantidade || !unidadeSelecionada || produto < 1 && quantidade < 1 && unidadeSelecionada == ''">Salvar</button>
-    </div>
+          </ion-item>
+          <ion-input type="text" placeholder="Dosagem:" [(ngModel)]="dosagem"></ion-input>
+          <div padding>
+            <button ion-button (click)="calcular(insumo, dosagem)">Calcular</button>
+          </div>
+    </fieldset>
   </ion-list>
+  <ion-list *ngIf="dosagemDoInsumo != null">
+    <h3>Para está dosagem é necessario {{dosagemDoInsumo}}</h3>
+    <button ion-button (click)="novoInsumo()">Outro insumo</button>
+  </ion-list>
+
+
+
 </ion-content>

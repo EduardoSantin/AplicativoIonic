@@ -43,29 +43,6 @@ export class PlantioPage {
     })
   }
 
-  // populaSelectFazenda(){
-  //   this.http.get("https://fir-login-26b40.firebaseio.com/fazenda/"+this.uid+'.json')
-  //   .map(res => res.json()).subscribe(data => {
-  //     if(data != null && data != undefined){
-  //       this.trataDadosFazenda(data);
-  //     }
-  //   })
-  // }
-  
-  // trataDadosFazenda(dados){
-  //   if(dados != null){
-  //     this.listFazenda = Object.keys(dados).map(i => {
-  //       dados[i].key = i;
-  //       return dados[i];
-  //     });
-  //   }
-  // }
-
-  // populaProximoSelect(event){
-  //   this.nomeFazenda = event;
-  //   this.populaSelectArea();
-  // }
-
   populaSelectArea(){
     this.http.get("https://fir-login-26b40.firebaseio.com/areas/"+this.uid+".json")
     .map(res => res.json()).subscribe(data => {
