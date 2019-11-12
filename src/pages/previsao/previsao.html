@@ -1,15 +1,14 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Previsao do tempo</ion-title>
+    <ion-title>Previsão do tempo</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h2>Previsão para {{previsao?.results.city}}</h2>
+  <h2>Previsão para {{previsao?.results.city_name}}</h2>
   <ion-list>
     <ion-item>
-      <ion-label>Cidade</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input type="text" placeholder="Cidade" [(ngModel)]="cidade"></ion-input>
     </ion-item>
   </ion-list>
   <button ion-button block (click)="buscaPorCidade()">Buscar</button>

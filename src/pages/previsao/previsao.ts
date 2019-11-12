@@ -13,6 +13,7 @@ import { HTTP } from '@ionic-native/http';
 export class PrevisaoPage {
 
   previsao:any;
+  cidade: string;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -33,5 +34,27 @@ export class PrevisaoPage {
       console.log(error.headers);
 
     });
+  }
+
+  buscaPorCidade(){
+    if(this.cidade == ""){
+      this.cidade = "Faxinal dos Guedes";
+    }
+
+    this.http.get('https://api.hgbrasil.com/weather/', {format:'json', locale:'pt', city_name:this.cidade,key:'e401c371'}, {}).then(data => {
+
+      console.log(data.status);
+      console.log(data.data); // data received by server
+      console.log(data.headers);
+      this.previsao = JSON.parse(data.data);
+    }).catch(error => {
+
+      console.log(error.status);
+      console.log(error.error); // error message as string
+      console.log(error.headers);
+
+    });
+
+
   }
 }
