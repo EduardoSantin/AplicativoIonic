@@ -42,9 +42,7 @@ export class AnotacaoPage {
     this.http.get('https://fir-login-26b40.firebaseio.com/anotacao/'+this.uid+'.json')
     .map(res => res.json())
     .subscribe(data => {
-      if(data != null && data != undefined){
         this.trataDados(data);
-      }
     })
   }
 

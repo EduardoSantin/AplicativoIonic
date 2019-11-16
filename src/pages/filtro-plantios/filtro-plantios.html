@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Historico de plantios</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div>
+    <ion-item>
+        <ion-label>Filtrar por area</ion-label>
+        <ion-select okText="OK" cancelText="Cancelar" [(ngModel)]="areaSelecionada">
+          <ion-option *ngFor='let area of listArea'>{{area.nome}}</ion-option>
+        </ion-select>
+    </ion-item>
+  </div>
+  <h3>Produtividade</h3>
+  <ion-card *ngFor="let item of list">
+  <div *ngIf="areaSelecionada != null">
+    <div *ngIf="item.area == areaSelecionada">
+      <ion-item *ngIf="item.colhido == true">
+        <ion-card-content>
+            <ion-card-title>
+              <span>{{item.cultura}} - {{item.variedade}}</span>
+            </ion-card-title>
+          <span><strong>{{item.produtividade}}</strong></span>
+          <p>Area: {{item.area}}</p>
+          <p>Plantado em: {{item.data}}</p>
+          <p>Colhido em: {{item.dataColhido}}</p>
+          <p>Total: {{item.sacas}} sacas</p>
+        </ion-card-content>
+      </ion-item>
+    </div>
+  </div>
+  </ion-card>
+</ion-content>
