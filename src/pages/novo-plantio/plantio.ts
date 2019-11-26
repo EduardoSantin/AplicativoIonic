@@ -19,6 +19,7 @@ export class PlantioPage {
   cultura;
   variedade;
   data;
+  
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -27,20 +28,29 @@ export class PlantioPage {
     public db: AngularFireDatabase) {
   }
 
-  salvaPlantio(areaSelecionada:string, cultura:string, variedade:string, data:string){
+  salvaPlantio(areaSelecionada:string, cultura:string, variedade:string, data: String){
     this.db.database.ref("/plantio").child(this.uid).push({
       area: areaSelecionada,
       cultura: cultura,
       variedade: variedade,
-      data: data,
+      data: this.formatDate(data , 'pt-br'),
       colhido: false
     }).then(()=>{
+      console.log(this.data)
       this.areaSelecionada = "";
       this.cultura = "";
       this.variedade = "";
       this.data = "";
       this.navCtrl.setRoot("areasPlantadas");
     })
+  }
+
+  formatDate(data, formato) {
+    if (formato == 'pt-br') {
+      return (data.substr(0, 10).split('-').reverse().join('/'));
+    } else {
+      return (data.substr(0, 10).split('/').reverse().join('-'));
+    }
   }
 
   populaSelectArea(){

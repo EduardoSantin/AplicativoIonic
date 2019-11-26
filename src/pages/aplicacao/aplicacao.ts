@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Storage } from '@ionic/storage';
@@ -21,24 +21,41 @@ export class AplicacaoPage {
     public navParams: NavParams,
     public http: Http,
     public storage: Storage,
-    public db: AngularFireDatabase) {
+    public db: AngularFireDatabase,
+    public alertaController: AlertController) {
     }
 
-    hectaresTotal;
+    hectaresTotal = null;
     dosagemDoInsumo;
     insumo;
     dosagem;
 
+    presentAlert(title: string, subTitle: string){
+      let alert = this.alertaController.create({
+        title: title,
+        subTitle: subTitle,
+        buttons: ['OK']
+      });
+      alert.present();
+    }
+
     calcularTotal(quantidade: number, vazao: number){
       this.hectaresTotal = (quantidade/vazao).toFixed(2);
-      console.log("ira aplicar "+ this.hectaresTotal+" hectares no total");
+      if(this.hectaresTotal == "NaN" || this.hectaresTotal<= 0){
+        this.presentAlert("Erro", "Invalido digite novamente")
+        this.hectaresTotal = null;
+      }
     }
 
     calcular(insumo: string, dosagem: number){
-      console.log(insumo);
       this.insumo = insumo;
       this.dosagem = dosagem;
       this.dosagemDoInsumo = (this.hectaresTotal*dosagem).toFixed(2);
+      console.log(this.dosagemDoInsumo)
+      if(this.dosagemDoInsumo <= 0 || this.dosagemDoInsumo == "NaN"){
+        this.presentAlert("Erro", "Tente novamente")
+        this.dosagemDoInsumo = null;
+      }
     }
 
     novoInsumo(){

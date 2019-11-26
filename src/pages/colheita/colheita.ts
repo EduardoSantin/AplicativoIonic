@@ -33,12 +33,20 @@ export class ColheitaPage {
     this.db.database.ref("/plantio").child(this.uid).child(this.itemColher).update({
       colhido: true,
       sacas: sacas,
-      dataColhido: dataColheita,
+      dataColhido: this.formatDate(dataColheita, "pt-br"),
     }).then(()=>{
       this.item = item;
       this.calculaProdutividade();
       this.sacas = sacas;
     })
+  }
+
+  formatDate(data, formato) {
+    if (formato == 'pt-br') {
+      return (data.substr(0, 10).split('-').reverse().join('/'));
+    } else {
+      return (data.substr(0, 10).split('/').reverse().join('-'));
+    }
   }
 
   // pega todas areas do uid para calcularr

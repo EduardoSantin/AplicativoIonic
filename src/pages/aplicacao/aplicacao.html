@@ -1,7 +1,7 @@
 
 <ion-header>
   <ion-navbar>
-    <ion-title>Aplicacao</ion-title>
+    <ion-title>Aplicação</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -30,7 +30,7 @@
     </ion-list>
     <hr>
     <!-- seleciona insumos -->
-    <fieldset>
+    <fieldset *ngIf="hectaresTotal != null">
       <h5>Insumo</h5>
         <ion-item>
           <ion-label>Selecione o insumo</ion-label>
@@ -38,7 +38,7 @@
             <ion-option *ngFor='let insumo of listInsumos'>{{insumo.produto}}</ion-option>
           </ion-select>
           </ion-item>
-          <ion-input type="text" placeholder="Dosagem:" [(ngModel)]="dosagem"></ion-input>
+          <ion-input type="number" placeholder="Dosagem:" [(ngModel)]="dosagem"></ion-input>
           <div padding>
             <button ion-button (click)="calcular(insumo, dosagem)">Calcular</button>
           </div>
