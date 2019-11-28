@@ -13,7 +13,7 @@ import { HTTP } from '@ionic-native/http';
 export class PrevisaoPage {
 
   previsao:any;
-  cidade: string;
+  cidade: string = "";
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -41,7 +41,7 @@ export class PrevisaoPage {
       this.cidade = "Faxinal dos Guedes";
     }
 
-    this.http.get('https://api.hgbrasil.com/weather/', {format:'json', locale:'pt', city_name:this.cidade,key:'e401c371'}, {}).then(data => {
+    this.http.get('https://api.hgbrasil.com/weather/', {format:'json', locale:'pt', city_name:this.cidade, key:'bd277639'}, {}).then(data => {
 
       console.log(data.status);
       console.log(data.data); // data received by server
